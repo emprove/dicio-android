@@ -5,10 +5,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import org.dicio.skill.context.SkillContext
-import org.stypox.dicio.R
-import org.stypox.dicio.io.graphical.HeadlineSpeechSkillOutput
-import org.stypox.dicio.util.getString
 import org.dicio.skill.skill.SkillOutput
+import org.stypox.dicio.R
+import org.stypox.dicio.io.graphical.Headline
+import org.stypox.dicio.util.getString
 
 sealed interface LlmOutput : SkillOutput {
     data class Answer(val question: String, val answer: String) : LlmOutput {
@@ -23,18 +23,33 @@ sealed interface LlmOutput : SkillOutput {
         }
     }
 
-    data object NoQuestion : LlmOutput, HeadlineSpeechSkillOutput {
+    data object NoQuestion : LlmOutput {
         override fun getSpeechOutput(ctx: SkillContext): String =
             ctx.getString(R.string.skill_llm_no_question)
+
+        @Composable
+        override fun GraphicalOutput(ctx: SkillContext) {
+            Headline(text = getSpeechOutput(ctx))
+        }
     }
 
-    data object NoApiKey : LlmOutput, HeadlineSpeechSkillOutput {
+    data object NoApiKey : LlmOutput {
         override fun getSpeechOutput(ctx: SkillContext): String =
             ctx.getString(R.string.skill_llm_no_api_key)
+
+        @Composable
+        override fun GraphicalOutput(ctx: SkillContext) {
+            Headline(text = getSpeechOutput(ctx))
+        }
     }
 
-    data class Error(val message: String) : LlmOutput, HeadlineSpeechSkillOutput {
+    data class Error(val message: String) : LlmOutput {
         override fun getSpeechOutput(ctx: SkillContext): String =
             ctx.getString(R.string.skill_llm_error, message)
+
+        @Composable
+        override fun GraphicalOutput(ctx: SkillContext) {
+            Headline(text = getSpeechOutput(ctx))
+        }
     }
 }

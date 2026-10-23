@@ -130,7 +130,7 @@ class MusicSearchSkill(correspondingSkillInfo: SkillInfo, data: StandardRecogniz
 
         private fun supportsPlayFromSearch(controller: MediaController): Boolean {
             val actions = controller.playbackState?.actions ?: return true // unknown -> try
-            return actions and PlaybackState.ACTION_PLAY_FROM_SEARCH != 0L
+            return (actions and PlaybackState.ACTION_PLAY_FROM_SEARCH) != 0L
         }
 
         private fun startPlayFromSearchIntent(context: Context, query: String): Boolean {
