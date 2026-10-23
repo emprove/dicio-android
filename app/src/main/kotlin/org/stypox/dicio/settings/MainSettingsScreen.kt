@@ -25,6 +25,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -42,6 +46,7 @@ import org.stypox.dicio.settings.datastore.UserSettingsModule.Companion.newDataS
 import org.stypox.dicio.settings.datastore.WakeDevice
 import org.stypox.dicio.settings.ui.SettingsCategoryTitle
 import org.stypox.dicio.settings.ui.SettingsItem
+import org.stypox.dicio.settings.ui.ListSetting
 import org.stypox.dicio.ui.theme.AppTheme
 
 
@@ -146,6 +151,37 @@ private fun MainSettingsScreen(
         }
         if (wakeDevice == WakeDevice.WAKE_DEVICE_OWW) {
             /* OpenWakeWord-specific settings */
+            item {
+                val context = LocalContext.current
+                var threshold by remember {
+                    mutableStateOf(org.stypox.dicio.io.wake.oww.OwwSensitivity.threshold(context))
+                }
+                ListSetting(
+                    title = stringResource(R.string.pref_wake_sensitivity),
+                    description = stringResource(R.string.pref_wake_sensitivity_summary),
+                    possibleValues = org.stypox.dicio.io.wake.oww.OwwSensitivity.THRESHOLDS.map {
+                        ListSetting.Value(
+                            value = it,
+                            name = stringResource(
+                                when (it) {
+                                    0.3f -> R.string.pref_wake_sensitivity_very_high
+                                    0.4f -> R.string.pref_wake_sensitivity_high
+                                    0.5f -> R.string.pref_wake_sensitivity_normal
+                                    0.65f -> R.string.pref_wake_sensitivity_low
+                                    else -> R.string.pref_wake_sensitivity_original
+                                },
+                                it,
+                            ),
+                        )
+                    },
+                ).Render(
+                    value = threshold,
+                    onValueChange = {
+                        threshold = it
+                        org.stypox.dicio.io.wake.oww.OwwSensitivity.setThreshold(context, it)
+                    },
+                )
+            }
             item {
                 val isHeyDicio by viewModel.isHeyDicio.collectAsState(true)
                 if (isHeyDicio) {

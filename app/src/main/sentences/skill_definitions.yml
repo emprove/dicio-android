@@ -150,3 +150,16 @@ skills:
         captures:
           - id: question
             type: string
+
+  - id: volume
+    specificity: high
+    sentences:
+      - id: up
+      - id: down
+      - id: max
+      - id: mute
+      - id: unmute
+      - id: set_level
+        captures:
+          - id: level
+            type: string

@@ -24,6 +24,7 @@ import org.stypox.dicio.skills.lyrics.LyricsInfo
 import org.stypox.dicio.skills.media.MediaInfo
 import org.stypox.dicio.skills.music_search.MusicSearchInfo
 import org.stypox.dicio.skills.llm.LlmInfo
+import org.stypox.dicio.skills.volume.VolumeInfo
 import org.stypox.dicio.skills.navigation.NavigationInfo
 import org.stypox.dicio.skills.notify.NotifyInfo
 import org.stypox.dicio.skills.open.OpenInfo
@@ -57,6 +58,7 @@ class SkillHandler @Inject constructor(
         MediaInfo,
         MusicSearchInfo,
         LlmInfo,
+        VolumeInfo,
         JokeInfo,
         ListeningInfo(dataStore),
         TranslationInfo,

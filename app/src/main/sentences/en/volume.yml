@@ -1,0 +1,19 @@
+up:
+  - (turn|volume)? up (the? volume)?
+  - louder
+
+down:
+  - (turn|volume)? down (the? volume)?
+  - quieter
+
+max:
+  - max|maximum|full volume
+
+mute:
+  - mute (the? sound|volume)?
+
+unmute:
+  - unmute (the? sound|volume)?
+
+set_level:
+  - set? the? volume (to|at)? .level.

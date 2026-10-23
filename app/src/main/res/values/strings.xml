@@ -295,4 +295,19 @@
     <string name="pref_llm_api_key">OpenRouter API key</string>
     <string name="pref_llm_api_key_empty">Not set</string>
     <string name="pref_llm_model">Model</string>
+    <string name="skill_name_volume">Volume</string>
+    <string name="skill_sentence_example_volume">Louder</string>
+    <string name="skill_volume_level">Volume %1$d%%</string>
+    <string name="skill_volume_muted">Sound off</string>
+    <string name="skill_volume_not_understood">Did not understand the volume level “%1$s”</string>
+    <string name="skill_volume_failed">Cannot change the volume</string>
+    <string name="pref_music_search_youtube_api_key">YouTube Data API key</string>
+    <string name="pref_music_search_youtube_api_key_empty">Not set: tracks are searched by YouTube Music itself (less reliable)</string>
+    <string name="pref_wake_sensitivity">Wake word sensitivity</string>
+    <string name="pref_wake_sensitivity_summary">Higher sensitivity: fewer missed wake words, more false activations</string>
+    <string name="pref_wake_sensitivity_very_high">Very high (threshold %1$.2f)</string>
+    <string name="pref_wake_sensitivity_high">High (threshold %1$.2f)</string>
+    <string name="pref_wake_sensitivity_normal">Normal, openWakeWord default (threshold %1$.2f)</string>
+    <string name="pref_wake_sensitivity_low">Low (threshold %1$.2f)</string>
+    <string name="pref_wake_sensitivity_original">Original Dicio (threshold %1$.2f)</string>
 </resources>

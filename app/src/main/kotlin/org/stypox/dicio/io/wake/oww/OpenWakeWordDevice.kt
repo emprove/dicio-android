@@ -107,7 +107,27 @@ class OpenWakeWordDevice(
             audio[i] = audio16bitPcm[i].toFloat() / 32768.0f
         }
 
-        return model!!.processFrame(audio) > 0.8f
+        val score = model!!.processFrame(audio)
+        val threshold = OwwSensitivity.threshold(appContext)
+        logScore(score, threshold)
+        return score > threshold
+    }
+
+    // calibration aid: Logcat filter "OwwScore" shows the peak score of every utterance,
+    // so you can see how close a missed "Hey Dicio" got to the threshold
+    private var peakScore = 0.0f
+    private var framesSincePeak = 0
+
+    private fun logScore(score: Float, threshold: Float) {
+        if (score > peakScore) {
+            peakScore = score
+            framesSincePeak = 0
+        } else if (peakScore > 0.05f && ++framesSincePeak > 12) { // ~1 s after the peak
+            Log.i("OwwScore", "peak=%.3f threshold=%.2f %s".format(
+                peakScore, threshold, if (peakScore > threshold) "TRIGGERED" else "missed"))
+            peakScore = 0.0f
+            framesSincePeak = 0
+        }
     }
 
     override fun frameSize(): Int {
