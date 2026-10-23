@@ -34,7 +34,8 @@ class LlmSkill(correspondingSkillInfo: SkillInfo, data: StandardRecognizerData<L
 
         return try {
             val reply = withContext(Dispatchers.IO) {
-                ask(apiKey, LlmInfo.model(ctx.android), question, ctx.locale.language)
+                ask(apiKey, LlmInfo.model(ctx.android), question, ctx.locale.language,
+                    LlmInfo.reasoningEffort(ctx.android))
             }
             when (val decision = parseDecision(reply)) {
                 is Decision.Play ->
@@ -100,13 +101,24 @@ class LlmSkill(correspondingSkillInfo: SkillInfo, data: StandardRecognizerData<L
             return Decision.Answer(reply.replace(Regex("[*_#`{}]"), "").trim())
         }
 
-        fun ask(apiKey: String, model: String, question: String, language: String): String {
+        fun ask(
+            apiKey: String,
+            model: String,
+            question: String,
+            language: String,
+            reasoningEffort: String = "",
+        ): String {
             val body = JSONObject()
                 .put("model", model)
                 .put("max_tokens", 300)
                 .put("messages", JSONArray()
                     .put(JSONObject().put("role", "system").put("content", systemPrompt(language)))
                     .put(JSONObject().put("role", "user").put("content", question)))
+            // thinking is what makes a voice reply slow: by default ask for minimal reasoning
+            // https://openrouter.ai/docs/guides/best-practices/reasoning-tokens
+            if (reasoningEffort.isNotEmpty()) {
+                body.put("reasoning", JSONObject().put("effort", reasoningEffort).put("exclude", true))
+            }
 
             val connection = URL(ENDPOINT).openConnection() as HttpURLConnection
             try {

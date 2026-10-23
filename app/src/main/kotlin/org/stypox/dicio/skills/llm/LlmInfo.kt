@@ -17,6 +17,7 @@ import org.dicio.skill.skill.Skill
 import org.dicio.skill.skill.SkillInfo
 import org.stypox.dicio.R
 import org.stypox.dicio.sentences.Sentences
+import org.stypox.dicio.settings.ui.ListSetting
 import org.stypox.dicio.settings.ui.StringSetting
 
 object LlmInfo : SkillInfo("llm") {
@@ -24,6 +25,12 @@ object LlmInfo : SkillInfo("llm") {
     private const val PREFS = "skill_settings_llm"
     private const val KEY_API_KEY = "api_key"
     private const val KEY_MODEL = "model"
+    private const val KEY_REASONING = "reasoning"
+    /** "" = don't send the parameter (model default); otherwise OpenRouter reasoning.effort */
+    val REASONING_VALUES = listOf("", "minimal", "none")
+
+    fun reasoningEffort(context: Context): String =
+        prefs(context).getString(KEY_REASONING, "minimal")!!
 
     fun apiKey(context: Context): String =
         prefs(context).getString(KEY_API_KEY, "")!!.trim()
@@ -53,6 +60,7 @@ object LlmInfo : SkillInfo("llm") {
         val context = LocalContext.current
         var apiKey by remember { mutableStateOf(apiKey(context)) }
         var model by remember { mutableStateOf(prefs(context).getString(KEY_MODEL, "")!!) }
+        var reasoning by remember { mutableStateOf(reasoningEffort(context)) }
 
         Column {
             StringSetting(
@@ -76,6 +84,21 @@ object LlmInfo : SkillInfo("llm") {
                 onValueChange = { newValue ->
                     model = newValue.trim()
                     prefs(context).edit().putString(KEY_MODEL, model).apply()
+                },
+            )
+            ListSetting(
+                title = stringResource(R.string.pref_llm_reasoning),
+                description = stringResource(R.string.pref_llm_reasoning_summary),
+                possibleValues = listOf(
+                    ListSetting.Value("", stringResource(R.string.pref_llm_reasoning_default)),
+                    ListSetting.Value("minimal", stringResource(R.string.pref_llm_reasoning_minimal)),
+                    ListSetting.Value("none", stringResource(R.string.pref_llm_reasoning_none)),
+                ),
+            ).Render(
+                value = reasoning,
+                onValueChange = { newValue ->
+                    reasoning = newValue
+                    prefs(context).edit().putString(KEY_REASONING, newValue).apply()
                 },
             )
         }

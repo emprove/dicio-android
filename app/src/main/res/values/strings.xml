@@ -310,4 +310,9 @@
     <string name="pref_wake_sensitivity_normal">Normal, openWakeWord default (threshold %1$.2f)</string>
     <string name="pref_wake_sensitivity_low">Low (threshold %1$.2f)</string>
     <string name="pref_wake_sensitivity_original">Original Dicio (threshold %1$.2f)</string>
+    <string name="pref_llm_reasoning">Reasoning</string>
+    <string name="pref_llm_reasoning_summary">Less reasoning = faster spoken answers</string>
+    <string name="pref_llm_reasoning_default">Model default</string>
+    <string name="pref_llm_reasoning_minimal">Minimal (recommended)</string>
+    <string name="pref_llm_reasoning_none">Off (not supported by every model)</string>
 </resources>

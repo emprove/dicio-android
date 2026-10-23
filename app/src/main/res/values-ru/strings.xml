@@ -288,4 +288,9 @@
     <string name="pref_wake_sensitivity_normal">Обычная, по умолчанию в openWakeWord (порог %1$.2f)</string>
     <string name="pref_wake_sensitivity_low">Низкая (порог %1$.2f)</string>
     <string name="pref_wake_sensitivity_original">Как в оригинальном Dicio (порог %1$.2f)</string>
+    <string name="pref_llm_reasoning">Рассуждения модели</string>
+    <string name="pref_llm_reasoning_summary">Меньше рассуждений — быстрее ответ голосом</string>
+    <string name="pref_llm_reasoning_default">Как задано в модели</string>
+    <string name="pref_llm_reasoning_minimal">Минимальные (рекомендуется)</string>
+    <string name="pref_llm_reasoning_none">Выключены (поддерживают не все модели)</string>
 </resources>
