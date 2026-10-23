@@ -281,4 +281,18 @@
     <string name="about_privacy_title">Privacy policy</string>
     <string name="about_privacy_description">Dicio connects to external services only when a skill is expected to do so, or to download machine learning models during setup. All speech processing is performed locally on-device, and most skills can be used offline.</string>
     <string name="about_privacy_link" translatable="false">https://stypox.org/dicio-privacy-policy.html</string>
+    <string name="skill_name_music_search">YouTube Music search</string>
+    <string name="skill_sentence_example_music_search">Play happy Spanish summer songs on YouTube Music</string>
+    <string name="skill_music_search_playing">Playing “%1$s” on YouTube Music…</string>
+    <string name="skill_music_search_resuming">Playing music…</string>
+    <string name="skill_music_search_not_installed">YouTube Music is not installed</string>
+    <string name="skill_music_search_failed">Could not play “%1$s”</string>
+    <string name="skill_name_llm">AI answers (OpenRouter)</string>
+    <string name="skill_sentence_example_llm">Woof woof where do reindeer graze?</string>
+    <string name="skill_llm_no_question">What do you want to ask?</string>
+    <string name="skill_llm_no_api_key">Set your OpenRouter API key in the skill settings</string>
+    <string name="skill_llm_error">AI request failed: %1$s</string>
+    <string name="pref_llm_api_key">OpenRouter API key</string>
+    <string name="pref_llm_api_key_empty">Not set</string>
+    <string name="pref_llm_model">Model</string>
 </resources>

@@ -22,6 +22,8 @@ import org.stypox.dicio.skills.fallback.text.TextFallbackInfo
 import org.stypox.dicio.skills.listening.ListeningInfo
 import org.stypox.dicio.skills.lyrics.LyricsInfo
 import org.stypox.dicio.skills.media.MediaInfo
+import org.stypox.dicio.skills.music_search.MusicSearchInfo
+import org.stypox.dicio.skills.llm.LlmInfo
 import org.stypox.dicio.skills.navigation.NavigationInfo
 import org.stypox.dicio.skills.notify.NotifyInfo
 import org.stypox.dicio.skills.open.OpenInfo
@@ -53,6 +55,8 @@ class SkillHandler @Inject constructor(
         TimerInfo,
         CurrentTimeInfo,
         MediaInfo,
+        MusicSearchInfo,
+        LlmInfo,
         JokeInfo,
         ListeningInfo(dataStore),
         TranslationInfo,

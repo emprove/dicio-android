@@ -134,3 +134,19 @@ skills:
             type: string
           - id: target
             type: string
+
+  - id: music_search
+    specificity: high
+    sentences:
+      - id: query
+        captures:
+          - id: what
+            type: string
+
+  - id: llm
+    specificity: high
+    sentences:
+      - id: query
+        captures:
+          - id: question
+            type: string
